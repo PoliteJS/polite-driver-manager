@@ -1,6 +1,6 @@
 {
   "name": "polite-driver-manager",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "cool design pattern to run logic agnostic stuff!",
   "main": "index.js",
   "scripts": {

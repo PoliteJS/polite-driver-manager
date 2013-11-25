@@ -6,17 +6,17 @@
 var path = require('path'),
 
 	// PoliteJS Dependencies
-	driverCollector = require('../src/services/driver-collector')
+	DriverCollector = require('../src/pdm')
 	;
 
-describe('Driver Collector', function () {
+describe('Polite Driver Collector', function () {
 
 	beforeEach(function () {
-		driverCollector.init();
+		DriverCollector.init();
 	});
 
 	afterEach(function () {
-		driverCollector.dispose();
+		DriverCollector.dispose();
 	});
 
 
@@ -28,9 +28,9 @@ describe('Driver Collector', function () {
 			driverFn = function () {
 				return now;
 			};
-		driverCollector.register('get-time', driverFn);
+		DriverCollector.register('get-time', driverFn);
 		expect(
-			driverCollector.locate('get-time')()
+			DriverCollector.locate('get-time')()
 		).to.equal(now);
 	});
 
@@ -41,15 +41,15 @@ describe('Driver Collector', function () {
 	 */
 	it('should return false if no driver was found', function () {
 		expect(
-			driverCollector.locate('get-time')
+			DriverCollector.locate('get-time')
 		).to.equal(false);
 	});
 
 
 	it('should load drivers from a folder', function () {
-		driverCollector.registerMany(path.resolve(__dirname + '/driver-collector-fixtures'));
+		DriverCollector.registerMany(path.resolve(__dirname + '/driver-collector-fixtures'));
 		expect(
-			driverCollector.locate('double-a-number')(2)
+			DriverCollector.locate('double-a-number')(2)
 		).to.equal(4);
 	});
 
